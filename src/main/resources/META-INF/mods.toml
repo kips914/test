@@ -6,7 +6,7 @@ license="MIT"
 modId="nightsiege"
 version="1.0.0"
 displayName="Night Siege"
-description='''Волны зомби с 5 дня: обычные, в броне, всадники, лучники и зомби с динамитом.'''
+description='''Волны зомби с 5 дня: особые зомби и мощный босс каждую пятую ночь.'''
 
 [[dependencies.nightsiege]]
 modId="forge"

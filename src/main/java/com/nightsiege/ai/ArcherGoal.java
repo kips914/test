@@ -9,7 +9,7 @@ import net.minecraft.world.entity.projectile.Arrow;
 
 import java.util.EnumSet;
 
-/** Зомби-лучник: стреляет с 6..18 блоков при прямой видимости, вблизи дерётся как обычный зомби. */
+/** Лучник держит дистанцию около 20 блоков и стреляет при прямой видимости. */
 public class ArcherGoal extends Goal {
     private final Zombie mob;
     private final double damage;
@@ -26,7 +26,7 @@ public class ArcherGoal extends Goal {
         LivingEntity t = mob.getTarget();
         if (t == null || !t.isAlive()) return false;
         double d = mob.distanceToSqr(t);
-        return d >= 36 && d <= 18 * 18 && mob.getSensing().hasLineOfSight(t);
+        return d <= 28 * 28 && mob.getSensing().hasLineOfSight(t);
     }
 
     @Override
@@ -43,11 +43,21 @@ public class ArcherGoal extends Goal {
     public void tick() {
         LivingEntity t = mob.getTarget();
         if (t == null) return;
-        mob.getNavigation().stop();
+        double distance = mob.distanceToSqr(t);
         mob.getLookControl().setLookAt(t, 30f, 30f);
-        if (--cooldown <= 0) {
+        if (distance < 16 * 16) {
+            double dx = mob.getX() - t.getX();
+            double dz = mob.getZ() - t.getZ();
+            double len = Math.max(0.001, Math.sqrt(dx * dx + dz * dz));
+            mob.getNavigation().moveTo(mob.getX() + dx / len * 5.0, mob.getY(), mob.getZ() + dz / len * 5.0, 1.15);
+        } else if (distance > 22 * 22) {
+            mob.getNavigation().moveTo(t, 1.0);
+        } else {
+            mob.getNavigation().stop();
+        }
+        if (distance >= 16 * 16 && distance <= 23 * 23 && --cooldown <= 0) {
             shoot(t);
-            cooldown = 40;
+            cooldown = 30;
         }
     }
 
