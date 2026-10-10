@@ -352,7 +352,6 @@ public class WaveManager {
         }
         player.getPersistentData().putLong("NSWhistleReadyAt", now + 200);
         level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BELL.value(), net.minecraft.sounds.SoundSource.PLAYERS, 1.4f, 0.65f);
-                net.minecraft.sounds.SoundSource.PLAYERS, 1.4f, 0.65f);
         player.displayClientMessage(Component.literal("Свисток привлёк зомби: " + called).withStyle(ChatFormatting.AQUA), true);
     }
 
