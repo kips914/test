@@ -46,7 +46,7 @@ public final class SiegeItems {
                         called++;
                     }
                     sp.getPersistentData().putLong("NSWhistleReadyAt", now + 200);
-                    serverLevel.playSound(null, sp.blockPosition(), net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BELL, net.minecraft.sounds.SoundSource.PLAYERS, 1.4f, 0.65f);
+                   serverLevel.playSound(null, sp.blockPosition(), net.minecraft.sounds.SoundEvents.NOTE_BLOCK_BELL.value(), net.minecraft.sounds.SoundSource.PLAYERS, 1.4f, 0.65f);
                     sp.displayClientMessage(Component.literal("Свисток привлёк зомби: " + called).withStyle(ChatFormatting.AQUA), true);
                     sp.getCooldowns().addCooldown(this, 200);
                 } else {
