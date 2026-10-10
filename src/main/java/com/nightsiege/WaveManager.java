@@ -267,7 +267,7 @@ public class WaveManager {
                 if (dx == 0 && dz == 0) continue;
                 BlockPos pos = center.offset(dx, 0, dz);
                 BlockState old = level.getBlockState(pos);
-                if (!old.isAir() && !old.getMaterial().isReplaceable()) continue;
+                if (!old.isAir() && !old.getMaterial().isReplaceable()) continue
                 boolean alreadyTracked = TEMP_BLOCKS.stream().anyMatch(t -> t.level == level && t.pos.equals(pos));
                 if (alreadyTracked) continue;
                 TEMP_BLOCKS.add(new TemporaryBlock(level, pos.immutable(), old, gameTime + 80));
